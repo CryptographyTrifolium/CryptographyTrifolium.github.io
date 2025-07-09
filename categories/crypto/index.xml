@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Crypto on cryptographytrifolium</title>
-        <link>http://localhost:1313/categories/crypto/</link>
+        <link>https://cryptographytrifolium.github.io/categories/crypto/</link>
         <description>Recent content in Crypto on cryptographytrifolium</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Fri, 09 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/crypto/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 09 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://cryptographytrifolium.github.io/categories/crypto/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>梅森旋转生成随机数</title>
-        <link>http://localhost:1313/p/%E6%A2%85%E6%A3%AE%E6%97%8B%E8%BD%AC%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+        <link>https://cryptographytrifolium.github.io/p/%E6%A2%85%E6%A3%AE%E6%97%8B%E8%BD%AC%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
         <pubDate>Fri, 09 May 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/%E6%A2%85%E6%A3%AE%E6%97%8B%E8%BD%AC%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+        <guid>https://cryptographytrifolium.github.io/p/%E6%A2%85%E6%A3%AE%E6%97%8B%E8%BD%AC%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
         <description>&lt;h1 id=&#34;梅森旋转生成随机数的逆向预测和恢复&#34;&gt;梅森旋转生成随机数的逆向预测和恢复
 &lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;预测下一个随机数，恢复被隐藏的随机数据&lt;/li&gt;
