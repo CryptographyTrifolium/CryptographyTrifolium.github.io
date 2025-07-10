@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF密码方向暑假考核计划</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --background: #f8f9fa;
+            --pie-color-1: #3498db;
+            --pie-color-2: #2ecc71;
+            --pie-color-3: #f1c40f;
+            --pie-color-4: #e74c3c;
+            --pie-color-5: #9b59b6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: #333;
+            line-height: 1.7;
+            padding: 20px;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            transform: rotate(45deg);
+            transition: transform 0.5s ease-out;
+        }
+        header:hover::before {
+            transform: rotate(60deg) scale(1.1);
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.25);
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .info-box {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 40px 30px;
+            border-bottom: 1px solid #e9ebee;
+        }
+        section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 4px solid var(--secondary);
+            display: inline-block;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        h2::before {
+            content: '🎯 ';
+            margin-right: 5px;
+        }
+
+        .principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .principle-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            border-top: 5px solid var(--secondary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .principle-card h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        
+        .schedule {
+            background: #f8f9fc;
+            padding: 40px;
+            border-radius: 10px;
+        }
+        
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--secondary);
+            transition: box-shadow 0.3s ease;
+        }
+        .day-card:hover {
+            box-shadow: 0 12px 30px rgba(52, 152, 219, 0.2);
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .day-title {
+            font-size: 1.7rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .day-subtitle {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: var(--secondary);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .retention {
+            background: #f0f7ff;
+            border-radius: 10px;
+            padding: 40px;
+        }
+        .retention h2::before { content: '🏆 '; }
+        
+        .tiers {
+            display: grid;
+        }
+        
+        .tier-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tier-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tier-card.core { border-top: 5px solid var(--success); }
+        .tier-card.prep { border-top: 5px solid var(--warning); }
+        .tier-card.observe { border-top: 5px solid var(--secondary); }
+        
+        .tier-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.6rem;
+        }
+        .tier-card.core h3 { color: var(--success); }
+        .tier-card.prep h3 { color: var(--warning); }
+        .tier-card.observe h3 { color: var(--secondary); }
+        
+        .tier-card ul {
+            text-align: left;
+            margin-top: 20px;
+            padding-left: 20px;
+            list-style: '✅ ';
+        }
+        
+        .tier-card li { margin-bottom: 12px; }
+        
+        .measures { margin-top: 40px; }
+        .measures h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .measure-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .measure-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transform: translateX(5px);
+        }
+
+        .measure-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .sustainability {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 40px;
+        }
+        .sustainability h2::before { content: '⚙️ '; }
+        
+        .radar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+            min-height: 350px; /* Ensure space for chart rendering */
+        }
+        
+        .flow-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .key-point {
+            background: linear-gradient(135deg, var(--secondary), #4da6ff);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+        .key-point h3 { color: white; border: none; }
+        
+        footer {
+            text-align: center;
+            padding: 40px 30px;
+            color: #777;
+            background: var(--light);
+            font-size: 0.95rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .mermaid {
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.1rem; }
+            .content-grid, .principles, .tiers { grid-template-columns: 1fr; }
+            .day-header { flex-direction: column; align-items: flex-start; }
+            section, .schedule, .retention, .sustainability { padding: 30px 20px; }
+            header { padding: 40px 20px; }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Mermaid.js
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                fontFamily: "'Noto Sans SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                securityLevel: 'loose',
+                themeVariables: {
+                    primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--light').trim(),
+                    primaryTextColor: getComputedStyle(document.documentElement).getPropertyValue('--dark').trim(),
+                    primaryBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--secondary').trim(),
+                    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--primary').trim(),
+                    secondaryColor: getComputedStyle(document.documentElement).getPropertyValue('--background').trim(),
+                    tertiaryColor: getComputedStyle(document.documentElement).getPropertyValue('--light').trim(),
+                    
+                    // Pie chart specific colors matched with CSS variables
+                    pie1: getComputedStyle(document.documentElement).getPropertyValue('--pie-color-1').trim(),
+                    pie2: getComputedStyle(document.documentElement).getPropertyValue('--pie-color-2').trim(),
+                    pie3: getComputedStyle(document.documentElement).getPropertyValue('--pie-color-3').trim(),
+                    pie4: getComputedStyle(document.documentElement).getPropertyValue('--pie-color-4').trim(),
+                    pie5: getComputedStyle(document.documentElement).getPropertyValue('--pie-color-5').trim(),
+                    pie6: '#8e44ad',
+                    pie7: '#2c3e50',
+                    pie8: '#7f8c8d',
+                    pie9: '#d35400',
+                    pie10: '#c0392b',
+                    pie11: '#bdc3c7',
+                    pie12: '#2980b9',
+                    
+                    pieTitleTextSize: '20px',
+                    pieSectionTextSize: '16px',
+                    pieLegendTextSize: '16px',
+                    pieStrokeColor: '#fff',
+                    pieStrokeWidth: '2px',
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CTF密码方向暑假考核计划</h1>
+            <p class="subtitle">分层激励+动态评估 - 平衡人才稀缺与质量保障的双重挑战</p>
+            <div class="info-box">
+                <div class="info-item">考核人数：6人</div>
+                <div class="info-item">考核周期：4周</div>
+                <div class="info-item">考核方向：密码学</div>
+                <div class="info-item">融合：CVE/Cryptohack/国际CTF</div>
+            </div>
+        </header>
+        
+        <section>
+            <h2>考核设计原则</h2>
+            <div class="principles">
+                <div class="principle-card">
+                    <h3>实战导向</h3>
+                    <p>结合CVE漏洞复现、Cryptohack实战平台、真实密码系统分析，确保考核内容与实际比赛和工作场景紧密相关。</p>
+                </div>
+                <div class="principle-card">
+                    <h3>动态分级</h3>
+                    <p>设置难度梯度，区分核心能力与潜力评估，为不同水平成员提供合适的挑战和发展路径。</p>
+                </div>
+                <div class="principle-card">
+                    <h3>效率优先</h3>
+                    <p>紧凑周期覆盖知识、实战、协作三维度评估，最大化评估效率同时减少成员时间负担。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="schedule">
+            <h2 style="border-color: var(--accent);">考核日程与内容</h2>
+            
+            <div class="day-card">
+                <div class="day-header">
+                    <div>
+                        <div class="day-title">Section A：基础能力筛查</div>
+                        <div class="day-subtitle">线上独立解题</div>
+                    </div>
+                    <div class="day-subtitle">平台：Cryptohack</div>
+                </div>
+                
+                <div class="content-grid">
+                    <div>
+                        <div class="mermaid">
+                            graph LR
+                                A[格密码] --> B[曲线密码]
+                                B --> C[国密算法]
+                                C --> D[数论基础]
+                        </div>
+                    </div>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>题目类型</th>
+                                    <th>分值</th>
+                                    <th>具体内容</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>LWE 变种</td>
+                                    <td>25</td>
+                                    <td>一类 solve with bound 规约问题</td>
+                                </tr>
+                                <tr>
+                                    <td>曲线类密码实践</td>
+                                    <td>25</td>
+                                    <td>ECC相关各类攻击<br>同源曲线相关协议</td>
+                                </tr>
+                                <tr>
+                                    <td>算法分析</td>
+                                    <td>25</td>
+                                    <td>SM4线性特征分析（输出S盒差分表）<br>AES白盒分析</td>
+                                </tr>
+                                <tr>
+                                    <td>数论综合</td>
+                                    <td>25</td>
+                                    <td>有限域及其应用</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><strong>晋级线：</strong> ≥75分晋级，60-75分待定观察</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div class="day-card">
+                <div class="day-header">
+                    <div>
+                        <div class="day-title">Section B：Realworld Project</div>
+                        <div class="day-subtitle"> 面向真实世界的密码学</div>
+                    </div>
+                    <div class="day-subtitle">提交对国密系列或后量子密码组件的研究报告</div>
+                </div>
+                
+                <div class="content-grid">
+                    <div>
+                        <div class="code-block">
+# 真实世界的密码应用场景分析研究
+research_topics = [
+    "TLS 1.3会话密钥推导",<br>
+    "SM4 白盒 Token 伪造",<br>
+    "以太坊智能合约私钥泄露",<br>
+    "国密SM2/SM3/SM4协议审计",<br>
+    "PQC-SSL协议分析",<br>
+    "国密TLS协议漏洞挖掘",<br>
+    "Crypto-web",<br>
+    "..."<br>
+]
+
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>挑战类型</th>
+                                    <th>核心考点</th>
+                                    <th>动态积分规则</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>密码协议审计</td>
+                                    <td>TLS 1.3会话密钥推导</td>
+                                    <td>分析报告价值*时间衰减系数</td>
+                                </tr>
+                                <tr>
+                                    <td>密码分析</td>
+                                    <td>白盒攻击/侧信道/代数攻击</td>
+                                    <td>分析报告价值*时间衰减系数</td>
+                                </tr>
+                                <tr>
+                                    <td>密码 web 安全</td>
+                                    <td>Token / 消息摘要 / 缓冲区</td>
+                                    <td>分析报告价值*时间衰减系数</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        
+                        <p class="mb-1">基础分计算：</p>
+                        <div class="katex">
+                            $$
+                            \text{base\_score} = \frac{\text{technical\_depth} + \text{completeness} + \text{clarity}}{3} \times 100
+                            $$
+                        </div>
+                    
+                    
+                    
+                        <style>
+                            .katex-scroll {
+                                overflow-x: auto;
+                                max-width: 100%;
+                                padding-bottom: 4px;
+                            }
+                            .katex-scroll .katex-display {
+                                white-space: nowrap;
+                            }
+                            </style>
+                            
+                            <p class="mb-1"><strong>基础分计算：</strong></p>
+                            <div class="katex-scroll mb-3">
+                                $$
+                                \text{base\_score} = \frac{\text{technical\_depth} + \text{completeness} + \text{clarity}}{3} \times 100
+                                $$
+                            </div>
+                            
+                            <p class="mb-1"><strong>时间衰减因子：</strong></p>
+                            <div class="katex-scroll mb-3">
+                                $$
+                                \text{time\_decay} = \max\left(0, 1 - \frac{\text{days\_late}}{7}\right)
+                                $$
+                            </div>
+                            
+                            <p class="mb-1"><strong>报告质量乘数：</strong></p>
+                            <div class="katex-scroll mb-3">
+                                $$
+                                \text{quality\_multiplier} = 0.7 + 0.3 \times \left(\frac{\text{innovation} + \text{accuracy} + \text{presentation}}{3}\right)
+                                $$
+                            </div>
+                            
+                            <p class="mb-1"><strong>最终评分公式：</strong></p>
+                            <div class="katex-scroll mb-3">
+                                $$
+                                \text{final\_score} = \text{base\_score} \times \text{time\_decay} \times \text{quality\_multiplier}
+                                $$
+                            </div>
+                        
+
+
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+            <div class="day-card">
+                <div class="day-header">
+                    <div>
+                        <div class="day-title">Section B: Real-world Project</div>
+                        <div class="day-subtitle">面向真实世界的密码学</div>
+                    </div>
+                    <div class="day-subtitle">提交国密系列或后量子密码组件的研究报告</div>
+                </div>
+                <div class="content-grid" style="display: flex; gap: 2rem; align-items: flex-start;">
+                    <!-- 研究主题 -->
+                    <div style="flex:1;">
+                        <div class="code-block" style="margin-bottom: 1.5rem;">
+                            <strong>研究主题举例：</strong>
+                            <pre style="background: #030303; border-radius: 6px; padding: 10px; font-size: 0.95em;">
+            topics = [
+                "TLS 1.3密钥推导",
+                "SM4白盒Token伪造",
+                "智能合约私钥泄露",
+                "国密协议审计",
+                "PQC-SSL协议分析",
+                "国密TLS漏洞挖掘",
+                "Crypto 网络分析",
+                "..."
+            ]
+                            </pre>
+                        </div>
+                    </div>
+                    <!-- 挑战类型表格 -->
+                    <div style="flex:1;">
+                        <table style="width:100%; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px #eee;">
+                            <thead style="background: #f3f6fa;">
+                                <tr>
+                                    <th>挑战类型</th>
+                                    <th>核心考点</th>
+                                    <th>积分规则</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>协议审计</td>
+                                    <td>TLS 1.3密钥推导</td>
+                                    <td>分值 × 时间系数</td>
+                                </tr>
+                                <tr>
+                                    <td>密码分析</td>
+                                    <td>白盒/侧信道/代数攻击</td>
+                                    <td>分值 × 时间系数</td>
+                                </tr>
+                                <tr>
+                                    <td>Web安全</td>
+                                    <td>Token/摘要/缓冲区</td>
+                                    <td>分值 × 时间系数</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 公式部分 -->
+                <div style="margin-top:2rem;">
+                    <style>
+                        .katex-scroll {
+                            overflow-x: auto;
+                            max-width: 100%;
+                            padding-bottom: 4px;
+                        }
+                        .katex-scroll .katex-display {
+                            white-space: nowrap;
+                        }
+                        .formula-label {
+                            font-weight: 600;
+                            color: #3a6ea5;
+                            margin-top: 1.2em;
+                            margin-bottom: 0.3em;
+                        }
+                    </style>
+                    <div class="formula-label">基础分：</div>
+                    <div class="katex-scroll mb-3">
+                        $$
+                        b = \frac{d + c + l}{3} \times 100
+                        $$
+                        <div style="font-size:0.92em;color:#888;">d: depth, c: completeness, l: clarity</div>
+                    </div>
+                    <div class="formula-label">时间系数：</div>
+                    <div class="katex-scroll mb-3">
+                        $$
+                        t = \max\left(0, 1 - \frac{s}{7}\right)
+                        $$
+                        <div style="font-size:0.92em;color:#888;">s: days late</div>
+                    </div>
+                    <div class="formula-label">质量系数：</div>
+                    <div class="katex-scroll mb-3">
+                        $$
+                        q = 0.7 + 0.3 \times \frac{i + a + p}{3}
+                        $$
+                        <div style="font-size:0.92em;color:#888;">i: innovation, a: accuracy, p: presentation</div>
+                    </div>
+                    <div class="formula-label">最终得分：</div>
+                    <div class="katex-scroll mb-3">
+                        $$
+                        \text{score} = b \times t \times q
+                        $$
+                    </div>
+                </div>
+            </div>
+            <div class="day-card">
+                <div class="day-header">
+                    <div>
+                        <div class="day-title">Section C：CVE深度复现</div>
+                        <div class="day-subtitle">压力测试 · 48小时漏洞分析马拉松</div>
+                    </div>
+                    <div class="day-subtitle">提交项目要求：<br> 1. Dockerfile <br> 2. exp.py <br> 3. README.md </div>
+                </div>
+                
+                <div class="content-grid">
+                    <div>
+                        <div class="code-block">
+# CVE复现任务清单<br>
+cve_list = [<br>
+    "Chose By Yourself:Exploit by yourself"<br>
+]
+                        </div>
+                        <h3>交付物要求</h3>
+                        <ol>
+                            <li>漏洞原理图解（含数学推导）</li>
+                            <li>PoC利用脚本（可获取靶机flag）</li>
+                            <li>防御方案设计（代码补丁+监控方案）</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <div class="mermaid">
+                            pie
+                                title CVE复现评分权重
+                                "数学建模能力": 40
+                                "工具链熟练度": 30
+                                "方案完整性": 20
+                                "团队协作": 10
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div>
+                        <div class="day-title">Section D：综合面试评估</div>
+                        <div class="day-subtitle">压力测试与潜力评估</div>
+                    </div>
+                </div>
+                
+                <div class="content-grid">
+                    <div>
+                        <div class="mermaid">
+                            pie
+                                title 面试评估权重
+                                "密码直觉": 20
+                                "技术表达力": 25
+                                "抗压韧性": 20
+                                "工具创新": 15
+                                "代码能力": 20
+                        </div>
+                    </div>
+                    <div>
+                        <h3>压力测试题</h3>
+                        <ol>
+                            <li>分析植入错误的RSA-CRT实现（15分钟）</li>
+                            <li>快速挑战LWE格密码（Cryptohack Level 10）</li>
+                            <li>解释 UOV One Vec2 Rule Them All漏洞</li>
+                            <li>选手自定义且具有同等工作量主题</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="retention">
+            <h2>人员保留策略</h2>
+            
+            <h3>三阶晋升通道</h3>
+            <div class="tiers">
+                <div class="tier-card core">
+                    <h3>核心队员</h3>
+                    <p><strong>准入标准：</strong>总分≥85分</p>
+                    <p><strong>发展权益：</strong></p>
+                    <ul>
+                        <li>联合战队推荐资格</li>
+                        <li>项目/赛事名额</li>
+                        <li>团队管理工作与权限</li>
+                    </ul>
+                </div>
+                
+                <div class="tier-card prep">
+                    <h3>预备队员</h3>
+                    <p><strong>准入标准：</strong>75-85分</p>
+                    <p><strong>发展任务：</strong></p>
+                    <ul>
+                        <li>周训+专题研讨会</li>
+                        <li>CTF 参与度要求</li>
+                        <li>内部知识库编写</li>
+                    </ul>
+                </div>
+                
+                <div class="tier-card observe">
+                    <h3>新芽学员</h3>
+                    <p><strong>准入标准：</strong>60-75分+单项突破</p>
+                    <p><strong>发展任务：</strong></p>
+                    <ul>
+                        <li>内部知识库编写</li>
+                        <li>月度挑战赛参与</li>
+                        <li>导师指导计划</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="measures">
+                <h3>防流失措施</h3>
+                <div class="measure-card">
+                    <div class="measure-icon">👨‍🏫</div>
+                    <div>
+                        <h4>导师机制</h4>
+                        <p>核心队员轮值担任新人导师，计入个人贡献分</p>
+                    </div>
+                </div>
+                <div class="measure-card">
+                    <div class="measure-icon">🚀</div>
+                    <div>
+                        <h4>快速通道</h4>
+                        <p>独立复现高危CVE或发现0day漏洞可直接晋级核心队员</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="sustainability">
+            <h2>可持续性设计</h2>
+            
+            <h3>能力图谱系统</h3>
+            <div class="radar-container">
+                 <div class="mermaid">
+                    pie
+                        title 技能总分分布
+                        "密码分析": 145
+                        "数论基础": 165
+                        "侧信道攻防": 165
+                        "协议审计": 145
+                        "代码开发": 140
+                </div>
+            </div>
+            
+            <h3>考核复用机制</h3>
+            <div class="content-grid">
+                <div>
+                    <h4>Cryptohack 平台</h4>
+                    <ul>
+                        <li>解题路径回溯分析</li>
+                        <li>实时积分看板</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>每日复盘闭环</h4>
+                    <div class="mermaid">
+                        graph LR
+                            A[当日考核] --> B[复盘]
+                            B --> C{发现共性弱点?}
+                            C -->|是| D[针对性训练]
+                            C -->|否| E[次日考核]
+                            D --> E
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <h3>执行要点</h3>
+                <p>采用诊断-修复闭环机制，每日考核后进行2小时定向复盘。重点关注在CVE复现中展现工具链创新能力或在压力测试中保持逻辑清晰度的成员。数据表明，定向修补可使后续环节得分提升35%以上。</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>CTF密码方向考核计划 © 2025 | 设计：CTF战队密码方向负责人</p>
+            <p>结合国际CTF赛事、CVE复现、Cryptohack等实战内容</p>
+        </footer>
+    </div>
+</body>
+</html>
